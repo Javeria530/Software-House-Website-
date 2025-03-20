@@ -14,12 +14,8 @@ Technologies Used
 HTML – Structuring the website
 CSS – Styling and layout
 JavaScript – Enhancing interactivity
-Installation & Setup
-Clone the repository:
-bash
-Copy code
-git clone https://github.com/yourusername/quantumleap-tech.git
-Open the project folder and launch index.html in a browser.
+
+
 Pages Included
 📌 Intro Page – Overview of QuantumLeap Tech
 📌 Login Page – Secure user authentication

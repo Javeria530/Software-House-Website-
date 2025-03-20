@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>QuantumLeap Tech</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+       
+    </style>
+</head>
+<body>
+    <section id="header">
+        <a href="home.html"><img src="images/lo.png" class="logo" style="width: 50px; height: auto;" alt="Logo"></a>
+
+        <div>
+            <ul id="navbar">
+                <li><a href="index.html"><i class="fa fa-home"></i></a></li>
+                <li><a><i class="fas fa-info-circle" style="font-size:24px"></i></a></li>
+                <li><a><i class="fas fa-th-list"></i></a></li>
+                <li><a href="signup.html"><i class="fas fa-user-alt"></i></a></li>
+                <li><a><i class="fa fa-phone"></i></a></li>
+                <li><a><i class="fas fa-user-plus"></i></a></li>
+                <li><a><i class="fas fa-tachometer-alt"></i></a></li>
+                <li id="close"><i class="fas fa-times"></i></li>
+            </ul>
+        </div>
+        <div id="mobile">
+
+            <i id="bar" class="fas fa-outdent"></i>
+        </div>
+    </section>
+
+    <section id="forgot-password">
+        <h2 id="form-title">Reset Your Password</h2>
+
+        <!-- Step 1: Enter Email Form -->
+        <form id="email-form" onsubmit="return sendResetLink()">
+            <p>Enter your email address and get reset pasward link.</p>
+            <br />
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <button type="submit" class="normal">Send Reset Link</button>
+            <p><a href="login.html">Back to Login</a></p>
+        </form>
+
+        <!-- Step 2: Reset Password Form (Initially Hidden) -->
+        <form id="reset-form" onsubmit="return resetPassword()" style="display: none;">
+            <p>Enter your new password below.</p>
+            <div class="form-group">
+                <label for="new-password">New Password</label>
+                <input type="password" id="new-password" name="new-password" required>
+            </div>
+            <div class="form-group">
+                <label for="confirm-password">Confirm Password</label>
+                <input type="password" id="confirm-password" name="confirm-password" required>
+            </div>
+            <button type="submit" class="normal">Reset Password</button>
+            <p><a href="login.html">Back to Login</a></p>
+        </form>
+    </section>
+    <script src="script.js"></script>
+</body>
+</html>

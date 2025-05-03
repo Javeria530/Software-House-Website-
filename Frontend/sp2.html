@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Rose Boutique</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <section id="header">
+        <a href="home.html"><img src="images/lo.png" class="logo" style="width: 50px; height: auto;" alt="Logo"></a>
+        <div>
+            <ul id="navbar">
+                <li><a href="index.html"><i class="fa fa-home"></i></a></li>
+                <li><a href="whyus.html"><i class="fas fa-info-circle" style="font-size:24px"></i></a></li>
+                <li><a href="services.html"><i class="fas fa-th-list"></i></a></li>
+                <li><a href="signup.html"><i class="fas fa-user-alt"></i></a></li>
+                <li><a href="contact.html"><i class="fa fa-phone"></i></a></li>
+                <li><a href="vaci.html"><i class="fas fa-user-plus"></i></a></li>
+                <li><a href="prot.html"><i class="fas fa-tachometer-alt"></i></a></li>
+                <li id="close"><i class="fas fa-times"></i></li>
+            </ul>
+        </div>
+        <div id="mobile">
+
+            <i id="bar" class="fas fa-outdent"></i>
+        </div>
+    </section>
+
+    <section id="prodetails" class="section-p1">
+        <div class="single-pro-image">
+            <img src="images/img7.png" width="100%" id="mainimg" alt="Product Image" />
+        </div>
+        <div class="single-pro-details">
+
+            <h4>Automated Content Generation</h4>
+            <span>
+                Automated content generation is the use of artificial intelligence and machine learning technologies to create written, visual, or multimedia content with minimal human intervention. This process involves algorithms that analyze data, identify patterns, and generate coherent and contextually relevant content based on predefined inputs or dynamic user queries. Applications range from generating news articles, blog posts, and social media updates to creating personalized marketing content, product descriptions, and even creative writing. By leveraging natural language processing (NLP) and advanced text generation models, automated content generation can produce large volumes of content quickly, ensuring consistency, scalability, and the ability to tailor outputs to specific audiences or purposes.
+            </span>
+        </div>
+    </section>
+    <section id="product1" class="section-p1">
+        <h2>Projects</h2>
+
+        <div class="pro-container">
+            <div class="pro" onclick="window.location.href='sp1.html'">
+                <img src="images/img6.png" alt="Product Image" />
+                <div class="des">
+                    <h4>AI-Powered Chatbot</h4>
+                    <h5>Personalized recommendations based on user behavior and preferences</h5>
+
+                </div>
+
+            </div>
+            <div class="pro" onclick="window.location.href='sp2.html'">
+                <img src="images/img7.png" alt="Product Image" />
+                <div class="des">
+                    <h4>Automated Content Generation</h4>
+                    <h5>AI system that generates content such as articles, blog post.</h5>
+
+                </div>
+
+            </div>
+            <div class="pro" onclick="window.location.href='sp3.html'">
+                <img src="images/img8.png" alt="Product Image" />
+                <div class="des">
+                    <h4>Protein Structure Prediction</h4>
+                    <h5>Tool for predicting the 3D structure of proteins from their amino acid sequences.</h5>
+
+                </div>
+
+            </div>
+            <div class="pro" onclick="window.location.href='sp4.html'">
+                <img src="images/img9.png" alt="Product Image" />
+                <div class="des">
+                    <h4>Personalized Medicine Advisor</h4>
+                    <h5>System for integrating genomic data with clinical information to tailor personalized treatment plans.</h5>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p><b>Email: </b>Nakhalsheikh4@gmail.com</p>
+                <p><b>Phone: </b>+123-456-7890</p>
+                <p><b>Address: </b>136 Lahore Road, Sheikhupura, Pakistan</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Newsletter</h3>
+                <p>Subscribe to our newsletter for the latest updates and exclusive offers.</p>
+                <form id="newsletter-form">
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+                <p id="confirmation-message" style="display: none; color: #088178; margin-top: 10px;">Subscribed!</p>
+            </div>
+        </div>
+    </footer>
+
+
+</body>
+</html>

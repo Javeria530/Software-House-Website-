@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Sign Up - QuantumLeap Tech</title>
+    <link rel="stylesheet" href="/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="/js/api.js"></script>
+</head>
+<body>
+    <header id="header">
+        <div class="header-container">
+            <a href="/index.html" class="logo">
+                <img src="/images/lo.png" alt="QuantumLeap Tech">
+                <span>QuantumLeap</span>
+            </a>
+            
+            <nav>
+                <ul id="navbar">
+                    <li><a href="/index.html"><i class="fas fa-home"></i></a></li>
+                    <li><a href="/whyus.html"><i class="fas fa-info-circle"></i></a></li>
+                    <li><a href="/services.html"><i class="fas fa-cogs"></i></a></li>
+                    <li><a href="/signup.html" class="active"><i class="fas fa-user-plus"></i></a></li>
+                    <li><a href="/contact.html"><i class="fas fa-envelope"></i></a></li>
+                    <li><a href="/vaci.html"><i class="fas fa-briefcase"></i></a></li>
+                    <li><a href="/login.html"><i class="fas fa-sign-in-alt"></i></a></li>
+                    <li><a href="/prot.html"><i class="fas fa-tachometer-alt"></i></a></li>
+                    <li id="close"><i class="fas fa-times"></i></li>
+                </ul>
+            </nav>
+            
+            <div id="mobile">
+                <i id="bar" class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <main class="section">
+        <div class="container">
+            <div style="max-width: 500px; margin: 0 auto;">
+                <h2 style="text-align: center; margin-bottom: 2rem; font-size: 2.5rem;">
+                    <i class="fas fa-user-plus" style="color: var(--primary-color);"></i> Create an Account
+                </h2>
+                
+                <form id="signup-form">
+                    <div class="form-group has-icon">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" placeholder="Enter your full name" required />
+                        <i class="fas fa-user"></i>
+                    </div>
+                    
+                    <div class="form-group has-icon">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" placeholder="Enter your email address" required />
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    
+                    <div class="form-group has-icon">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" placeholder="Create a strong password" required />
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    
+                    <div class="form-group has-icon">
+                        <label for="confirm-password">Confirm Password</label>
+                        <input type="password" id="confirm-password" placeholder="Confirm your password" required />
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    
+                    <div class="form-group checkbox" style="margin-bottom: 1.5rem;">
+                        <input type="checkbox" id="terms" required>
+                        <label for="terms" style="margin: 0; font-weight: normal; text-transform: none;">
+                            I agree to the <a href="#" style="color: var(--primary-color); text-decoration: none;">Terms of Service</a> and 
+                            <a href="#" style="color: var(--primary-color); text-decoration: none;">Privacy Policy</a>
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; margin-bottom: 1.5rem;">
+                        <i class="fas fa-user-plus"></i> Create Account
+                    </button>
+                    
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <p style="color: #666; margin-bottom: 1rem;">Or sign up with</p>
+                        <div style="display: flex; gap: 1rem; justify-content: center;">
+                            <button type="button" class="btn btn-facebook btn-icon">
+                                <i class="fab fa-facebook-f"></i>
+                            </button>
+                            <button type="button" class="btn btn-google btn-icon">
+                                <i class="fab fa-google"></i>
+                            </button>
+                            <button type="button" class="btn btn-github btn-icon">
+                                <i class="fab fa-github"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                
+                <p style="text-align: center; margin-top: 2rem;">
+                    Already have an account? 
+                    <a href="/login.html" style="color: var(--primary-color); text-decoration: none; font-weight: 600;">
+                        Login here
+                    </a>
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3><i class="fas fa-envelope-open-text"></i> Contact Us</h3>
+                <p><i class="fas fa-envelope"></i> Nakhalsheikh4@gmail.com</p>
+                <p><i class="fas fa-phone"></i> +123-456-7890</p>
+                <p><i class="fas fa-map-marker-alt"></i> 136 Lahore Road, Sheikhupura, Pakistan</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3><i class="fas fa-paper-plane"></i> Newsletter</h3>
+                <p>Subscribe to our newsletter for the latest updates and exclusive offers.</p>
+                <form id="newsletter-form">
+                    <input type="email" id="newsletter-email" name="email" placeholder="Enter your email" required>
+                    <button type="submit"><i class="fas fa-arrow-right"></i></button>
+                </form>
+                <p id="confirmation-message" style="display: none; color: #4ECDC4; margin-top: 10px;">
+                    <i class="fas fa-check-circle"></i> Subscribed!
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('signup-form').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            
+            const submitButton = this.querySelector('button[type="submit"]');
+            submitButton.classList.add('btn-loading');
+            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating Account...';
+            
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            
+            try {
+                if (password !== confirmPassword) {
+                    throw new Error('Passwords do not match');
+                }
+                
+                const userData = {
+                    name,
+                    email,
+                    password,
+                    role: 'user'
+                };
+                
+                const data = await registerUser(userData);
+                
+                if (data.message === 'User registered') {
+                    // Success animation
+                    submitButton.classList.remove('btn-loading');
+                    submitButton.innerHTML = '<i class="fas fa-check-circle"></i> Account Created!';
+                    submitButton.classList.add('btn-success');
+                    
+                    setTimeout(() => {
+                        window.location.href = '/login.html';
+                    }, 1500);
+                } else {
+                    throw new Error(data.message || 'Registration failed');
+                }
+            } catch (error) {
+                submitButton.classList.remove('btn-loading');
+                submitButton.innerHTML = '<i class="fas fa-user-plus"></i> Create Account';
+                
+                // Show error
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'feedback invalid';
+                errorDiv.style.textAlign = 'center';
+                errorDiv.style.marginTop = '1rem';
+                errorDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${error.message}`;
+                
+                this.appendChild(errorDiv);
+                setTimeout(() => errorDiv.remove(), 3000);
+            }
+        });
+
+        // Password strength indicator
+        const passwordInput = document.getElementById('password');
+        passwordInput.addEventListener('input', function() {
+            const password = this.value;
+            const strength = checkPasswordStrength(password);
+            
+            const feedback = this.nextElementSibling || document.createElement('div');
+            feedback.className = 'feedback';
+            feedback.style.marginTop = '0.5rem';
+            
+            if (password.length === 0) {
+                feedback.innerHTML = '';
+                return;
+            }
+            
+            const colors = {
+                weak: '#E74C3C',
+                medium: '#F39C12',
+                strong: '#2ECC71'
+            };
+            
+            feedback.style.color = colors[strength.level];
+            feedback.innerHTML = `<i class="fas fa-shield-alt"></i> Password strength: ${strength.level}`;
+            
+            if (!this.nextElementSibling) {
+                this.parentNode.appendChild(feedback);
+            }
+        });
+        
+        function checkPasswordStrength(password) {
+            let strength = 0;
+            
+            if (password.length >= 8) strength++;
+            if (/[a-z]/.test(password)) strength++;
+            if (/[A-Z]/.test(password)) strength++;
+            if (/[0-9]/.test(password)) strength++;
+            if (/[^A-Za-z0-9]/.test(password)) strength++;
+            
+            if (strength <= 2) return { level: 'weak' };
+            if (strength <= 4) return { level: 'medium' };
+            return { level: 'strong' };
+        }
+
+        // Handle header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
+    <script src="/js/script.js"></script>
+</body>
+</html>

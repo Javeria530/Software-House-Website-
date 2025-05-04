@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Profile - QuantumLeap Tech</title>
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="/js/api.js"></script>
+</head>
+<body>
+    <header id="header">
+        <div class="header-container">
+            <a href="/index.html" class="logo">
+                <img src="/images/lo.png" alt="QuantumLeap Tech">
+                <span>QuantumLeap</span>
+            </a>
+            
+            <nav>
+                <ul id="navbar">
+                    <li><a href="/index.html"><i class="fas fa-home"></i></a></li>
+                    <li><a href="/whyus.html"><i class="fas fa-info-circle"></i></a></li>
+                    <li><a href="/services.html"><i class="fas fa-cogs"></i></a></li>
+                    <li><a href="/contact.html"><i class="fas fa-envelope"></i></a></li>
+                    <li><a href="/vaci.html"><i class="fas fa-briefcase"></i></a></li>
+                    <li><a href="/prot.html" class="active"><i class="fas fa-tachometer-alt"></i></a></li>
+                    <li id="close"><i class="fas fa-times"></i></li>
+                </ul>
+            </nav>
+            
+            <div id="mobile">
+                <i id="bar" class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <main class="section">
+        <div class="container">
+            <div class="profile-container">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                    <h2><i class="fas fa-user-circle"></i> My Profile</h2>
+                    <div>
+                        <a href="/edit.html" class="btn btn-secondary">
+                            <i class="fas fa-edit"></i> Edit Profile
+                        </a>
+                        <button class="btn btn-primary" onclick="logout()" style="margin-left: 1rem;">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </button>
+                    </div>
+                </div>
+
+                <div class="user-info">
+                    <div id="user-info" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                        <!-- User info will be populated here -->
+                    </div>
+                </div>
+
+                <div class="project-form">
+                    <h3><i class="fas fa-plus-circle"></i> Submit a Project</h3>
+                    <form id="project-form">
+                        <div class="form-group">
+                            <label for="project-title">Project Title</label>
+                            <input type="text" id="project-title" placeholder="Enter project title" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="project-desc">Project Description</label>
+                            <textarea id="project-desc" placeholder="Describe your project" required rows="4"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i> Submit Project
+                        </button>
+                    </form>
+
+                    <h3 style="margin-top: 3rem;"><i class="fas fa-folder-open"></i> Submitted Projects</h3>
+                    <ul id="project-list" style="list-style: none; padding: 0;">
+                        <!-- Projects will be populated here -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3><i class="fas fa-envelope-open-text"></i> Contact Us</h3>
+                <p><i class="fas fa-envelope"></i> Nakhalsheikh4@gmail.com</p>
+                <p><i class="fas fa-phone"></i> +123-456-7890</p>
+                <p><i class="fas fa-map-marker-alt"></i> 136 Lahore Road, Sheikhupura, Pakistan</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3><i class="fas fa-paper-plane"></i> Newsletter</h3>
+                <p>Subscribe to our newsletter for the latest updates and exclusive offers.</p>
+                <form id="newsletter-form">
+                    <input type="email" id="newsletter-email" name="email" placeholder="Enter your email" required>
+                    <button type="submit"><i class="fas fa-arrow-right"></i></button>
+                </form>
+                <p id="confirmation-message" style="display: none; color: #4ECDC4; margin-top: 10px;">
+                    <i class="fas fa-check-circle"></i> Subscribed!
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let currentUser = null;
+
+        // Check authentication
+        const token = localStorage.getItem('token');
+        if (!token) {
+            alert('You are not logged in.');
+            window.location.href = '/login.html';
+        } else {
+            currentUser = JSON.parse(localStorage.getItem('user'));
+            if (currentUser) {
+                document.getElementById('user-info').innerHTML = `
+                    <div style="background: var(--background-light); padding: 1.5rem; border-radius: var(--border-radius);">
+                        <h4><i class="fas fa-id-badge"></i> Name</h4>
+                        <p>${currentUser.name}</p>
+                    </div>
+                    <div style="background: var(--background-light); padding: 1.5rem; border-radius: var(--border-radius);">
+                        <h4><i class="fas fa-envelope"></i> Email</h4>
+                        <p>${currentUser.email}</p>
+                    </div>
+                    <div style="background: var(--background-light); padding: 1.5rem; border-radius: var(--border-radius);">
+                        <h4><i class="fas fa-tag"></i> Role</h4>
+                        <p>${currentUser.role || 'User'}</p>
+                    </div>
+                `;
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            window.location.href = '/login.html';
+        }
+
+        const form = document.getElementById('project-form');
+        const list = document.getElementById('project-list');
+
+        const loadProjects = async () => {
+            try {
+                const projects = await getUserProjects();
+                list.innerHTML = '';
+                
+                if (projects.length === 0) {
+                    list.innerHTML = `
+                        <li style="text-align: center; padding: 2rem; background: var(--background-light); border-radius: var(--border-radius);">
+                            <i class="fas fa-inbox" style="font-size: 2rem; color: var(--primary-color); margin-bottom: 1rem;"></i>
+                            <p>No projects submitted yet.</p>
+                        </li>
+                    `;
+                    return;
+                }
+                
+                projects.forEach(p => {
+                    const li = document.createElement('li');
+                    li.style.marginBottom = '1rem';
+                    li.innerHTML = `
+                        <div style="background: var(--background-light); padding: 1.5rem; border-radius: var(--border-radius);">
+                            <h4 style="color: var(--primary-color); margin-bottom: 0.5rem;">
+                                <i class="fas fa-project-diagram"></i> ${p.title}
+                            </h4>
+                            <p style="margin-bottom: 0.75rem;">${p.description}</p>
+                            <small style="color: var(--text-dark); opacity: 0.7;">
+                                <i class="fas fa-calendar-alt"></i> Created: ${new Date(p.createdAt).toLocaleDateString()}
+                            </small>
+                        </div>
+                    `;
+                    list.appendChild(li);
+                });
+            } catch (error) {
+                console.error('Error loading projects:', error);
+                list.innerHTML = `
+                    <li style="text-align: center; padding: 2rem; background: #FFE5E5; border-radius: var(--border-radius); color: var(--error-color);">
+                        <i class="fas fa-exclamation-triangle"></i> Error loading projects. Please try again.
+                    </li>
+                `;
+            }
+        };
+
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const title = document.getElementById('project-title').value;
+            const description = document.getElementById('project-desc').value;
+
+            const submitButton = form.querySelector('button[type="submit"]');
+            submitButton.classList.add('loading');
+            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+
+            try {
+                await submitProject({ title, description });
+                form.reset();
+                loadProjects();
+                
+                // Show success message
+                const successMessage = document.createElement('div');
+                successMessage.style.cssText = `
+                    position: fixed;
+                    bottom: 20px;
+                    right: 20px;
+                    background: var(--success-color);
+                    color: white;
+                    padding: 1rem 2rem;
+                    border-radius: var(--border-radius);
+                    box-shadow: var(--box-shadow);
+                    animation: fadeInUp 0.3s ease;
+                `;
+                successMessage.innerHTML = '<i class="fas fa-check-circle"></i> Project submitted successfully!';
+                document.body.appendChild(successMessage);
+                
+                setTimeout(() => successMessage.remove(), 3000);
+            } catch (error) {
+                // Show error message
+                const errorMessage = document.createElement('div');
+                errorMessage.style.cssText = `
+                    position: fixed;
+                    bottom: 20px;
+                    right: 20px;
+                    background: var(--error-color);
+                    color: white;
+                    padding: 1rem 2rem;
+                    border-radius: var(--border-radius);
+                    box-shadow: var(--box-shadow);
+                    animation: fadeInUp 0.3s ease;
+                `;
+                errorMessage.innerHTML = '<i class="fas fa-exclamation-circle"></i> Error submitting project. Please try again.';
+                document.body.appendChild(errorMessage);
+                
+                setTimeout(() => errorMessage.remove(), 3000);
+            } finally {
+                submitButton.classList.remove('loading');
+                submitButton.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Project';
+            }
+        });
+
+        // Load projects on page load
+        loadProjects();
+
+        // Handle header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
+    <script src="/js/script.js"></script>
+</body>
+</html>

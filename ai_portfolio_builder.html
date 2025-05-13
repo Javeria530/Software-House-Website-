@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Portfolio Generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #ec4899;
+            --dark: #111827;
+            --light: #f9fafb;
+            --gray: #d1d5db;
+            --success: #10b981;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            padding: 0;
+            margin: 0;
+            overflow-x: hidden;
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('img3.png') no-repeat center center;
+            background-size: cover;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 2rem;
+            position: relative;
+        }
+        
+        .hero-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: -60px auto 50px;
+            padding: 2rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 10;
+        }
+        
+        h1, h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+        
+        .form-section {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            border-radius: 8px;
+            background-color: #f8fafc;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .form-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-section h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+        
+        .form-section h3 i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--gray);
+            border-radius: 6px;
+            background-color: white;
+            color: var(--dark);
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .suggestion-list {
+            list-style: none;
+            padding: 0;
+            margin: 8px 0 0;
+            max-height: 150px;
+            overflow-y: auto;
+            border: 1px solid var(--gray);
+            border-radius: 6px;
+            display: none;
+        }
+        
+        .suggestion-list li {
+            padding: 8px 12px;
+            cursor: pointer;
+            background-color: white;
+            border-bottom: 1px solid var(--gray);
+            transition: background-color 0.2s;
+        }
+        
+        .suggestion-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .suggestion-list li:hover {
+            background-color: #f3f4f6;
+        }
+        
+        .progress-bar {
+            height: 6px;
+            background-color: #e5e7eb;
+            border-radius: 3px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background-color: var(--primary);
+            width: 0%;
+            transition: width 0.5s ease-in-out;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 500;
+            text-align: center;
+            color: white;
+            background-color: var(--primary);
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn-icon {
+            margin-right: 8px;
+        }
+        
+        .btn-outline {
+            color: var(--primary);
+            background-color: transparent;
+            border: 1px solid var(--primary);
+        }
+        
+        .btn-outline:hover {
+            color: white;
+            background-color: var(--primary);
+        }
+        
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+        
+        #portfolio-preview {
+            margin-top: 3rem;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+        
+        #portfolio-preview h3 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+        
+        iframe {
+            width: 100%;
+            height: 500px;
+            border: 1px solid var(--gray);
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .download-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        #loading-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        
+        .loader {
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 5px solid var(--primary);
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .loading-text {
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        .generated-success {
+            display: none;
+            text-align: center;
+            padding: 15px;
+            margin: 20px 0;
+            background-color: #ecfdf5;
+            border-left: 4px solid var(--success);
+            border-radius: 4px;
+        }
+        
+        .form-tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--gray);
+            overflow-x: auto;
+        }
+        
+        .form-tab {
+            padding: 12px 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #6b7280;
+            position: relative;
+            transition: all 0.3s;
+        }
+        
+        .form-tab.active {
+            color: var(--primary);
+        }
+        
+        .form-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary);
+        }
+        
+        .form-tab-content {
+            display: none;
+        }
+        
+        .form-tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .tab-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1.5rem;
+        }
+        
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            color: var(--primary);
+            margin-left: 5px;
+        }
+        
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: #374151;
+            color: white;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.875rem;
+            font-weight: normal;
+        }
+        
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+                margin: -40px 15px 30px;
+            }
+            
+            .hero {
+                height: 250px;
+                padding: 1.5rem;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .form-tabs {
+                flex-wrap: nowrap;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero animate__animated animate__fadeIn">
+        <h1 class="hero-title animate__animated animate__fadeInDown">Create Your Professional Portfolio</h1>
+        <p class="hero-subtitle animate__animated animate__fadeInUp animate__delay-1s">Showcase your skills, projects, and experience with our interactive portfolio generator</p>
+    </div>
+
+    <div class="container animate__animated animate__fadeIn animate__delay-1s">
+        <div class="progress-bar">
+            <div class="progress" id="form-progress"></div>
+        </div>
+        
+        <div class="form-tabs">
+            <button class="form-tab active" data-tab="personal">
+                <i class="fas fa-user"></i> Personal
+            </button>
+            <button class="form-tab" data-tab="education">
+                <i class="fas fa-graduation-cap"></i> Education
+            </button>
+            <button class="form-tab" data-tab="experience">
+                <i class="fas fa-briefcase"></i> Experience
+            </button>
+            <button class="form-tab" data-tab="projects">
+                <i class="fas fa-code-branch"></i> Projects
+            </button>
+            <button class="form-tab" data-tab="skills">
+                <i class="fas fa-tools"></i> Skills
+            </button>
+            <button class="form-tab" data-tab="contact">
+                <i class="fas fa-envelope"></i> Contact
+            </button>
+        </div>
+        
+        <!-- Personal Information Tab -->
+        <div class="form-tab-content active" id="personal-tab">
+            <div class="form-section animate__animated animate__fadeIn">
+                <h3><i class="fas fa-user"></i> Personal Information</h3>
+                
+                <div class="form-group">
+                    <label for="portfolio-name">Your Full Name</label>
+                    <input type="text" id="portfolio-name" placeholder="Enter your full name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="portfolio-bio">Professional Summary 
+                        <span class="tooltip"><i class="fas fa-info-circle"></i>
+                            <span class="tooltiptext">Write a brief summary highlighting your key strengths and career objectives</span>
+                        </span>
+                    </label>
+                    <textarea id="portfolio-bio" rows="4" placeholder="Write a compelling professional summary..." required></textarea>
+                </div>
+                
+                <div class="tab-buttons">
+                    <div></div>
+                    <button class="btn next-tab" data-next="education">
+                        <i class="fas fa-arrow-right btn-icon"></i> Next: Education
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Education Tab -->
+        <div class="form-tab-content" id="education-tab">
+            <div class="form-section animate__animated animate__fadeIn">
+                <h3><i class="fas fa-graduation-cap"></i> Education Background</h3>
+                
+                <div class="form-group">
+                    <label for="portfolio-education">Education Details
+                        <span class="tooltip"><i class="fas fa-info-circle"></i>
+                            <span class="tooltiptext">Include degree, institution name, graduation date, and any notable achievements</span>
+                        </span>
+                    </label>
+                    <textarea id="portfolio-education" rows="4" placeholder="e.g., Bachelor of Science in Computer Science, University of Example, 2018-2022..." required></textarea>
+                    <ul class="suggestion-list" id="education-suggestions"></ul>
+                </div>
+                
+                <div class="tab-buttons">
+                    <button class="btn btn-outline prev-tab" data-prev="personal">
+                        <i class="fas fa-arrow-left btn-icon"></i> Previous
+                    </button>
+                    <button class="btn next-tab" data-next="experience">
+                        <i class="fas fa-arrow-right btn-icon"></i> Next: Experience
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Experience Tab -->
+        <div class="form-tab-content" id="experience-tab">
+            <div class="form-section animate__animated animate__fadeIn">
+                <h3><i class="fas fa-briefcase"></i> Work Experience</h3>
+                
+                <div class="form-group">
+                    <label for="portfolio-experience">Professional Experience
+                        <span class="tooltip"><i class="fas fa-info-circle"></i>
+                            <span class="tooltiptext">Include job title, company name, duration, and key responsibilities</span>
+                        </span>
+                    </label>
+                    <textarea id="portfolio-experience" rows="4" placeholder="e.g., Software Developer at Tech Company (2022-Present)..." required></textarea>
+                    <ul class="suggestion-list" id="experience-suggestions"></ul>
+                </div>
+                
+                <div class="tab-buttons">
+                    <button class="btn btn-outline prev-tab" data-prev="education">
+                        <i class="fas fa-arrow-left btn-icon"></i> Previous
+                    </button>
+                    <button class="btn next-tab" data-next="projects">
+                        <i class="fas fa-arrow-right btn-icon"></i> Next: Projects
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Projects Tab -->
+        <div class="form-tab-content" id="projects-tab">
+            <div class="form-section animate__animated animate__fadeIn">
+                <h3><i class="fas fa-code-branch"></i> Projects</h3>
+                
+                <div class="form-group">
+                    <label for="portfolio-projects">Notable Projects
+                        <span class="tooltip"><i class="fas fa-info-circle"></i>
+                            <span class="tooltiptext">Include project name, technologies used, and brief description</span>
+                        </span>
+                    </label>
+                    <textarea id="portfolio-projects" rows="4" placeholder="e.g., E-commerce Website (React, Node.js): Developed a fully responsive online store..." required></textarea>
+                    <ul class="suggestion-list" id="project-suggestions"></ul>
+                </div>
+                
+                <div class="tab-buttons">
+                    <button class="btn btn-outline prev-tab" data-prev="experience">
+                        <i class="fas fa-arrow-left btn-icon"></i> Previous
+                    </button>
+                    <button class="btn next-tab" data-next="skills">
+                        <i class="fas fa-arrow-right btn-icon"></i> Next: Skills
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Skills Tab -->
+        <div class="form-tab-content" id="skills-tab">
+            <div class="form-section animate__animated animate__fadeIn">
+                <h3><i class="fas fa-tools"></i> Skills</h3>
+                
+                <div class="form-group">
+                    <label for="portfolio-skills">Technical & Soft Skills
+                        <span class="tooltip"><i class="fas fa-info-circle"></i>
+                            <span class="tooltiptext">List your technical skills, programming languages, tools, and soft skills</span>
+                        </span>
+                    </label>
+                    <textarea id="portfolio-skills" rows="4" placeholder="e.g., JavaScript, React, Node.js, Teamwork, Communication..." required></textarea>
+                </div>
+                
+                <div class="tab-buttons">
+                    <button class="btn btn-outline prev-tab" data-prev="projects">
+                        <i class="fas fa-arrow-left btn-icon"></i> Previous
+                    </button>
+                    <button class="btn next-tab" data-next="contact">
+                        <i class="fas fa-arrow-right btn-icon"></i> Next: Contact
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Contact Tab -->
+        <div class="form-tab-content" id="contact-tab">
+            <div class="form-section animate__animated animate__fadeIn">
+                <h3><i class="fas fa-envelope"></i> Contact Information</h3>
+                
+                <div class="form-group">
+                    <label for="portfolio-gmail">Email Address</label>
+                    <input type="email" id="portfolio-gmail" placeholder="Enter your email address" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="portfolio-github">GitHub Profile</label>
+                    <input type="url" id="portfolio-github" placeholder="Enter your GitHub URL" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="portfolio-linkedin">LinkedIn Profile</label>
+                    <input type="url" id="portfolio-linkedin" placeholder="Enter your LinkedIn URL" required>
+                </div>
+                
+                <div class="tab-buttons">
+                    <button class="btn btn-outline prev-tab" data-prev="skills">
+                        <i class="fas fa-arrow-left btn-icon"></i> Previous
+                    </button>
+                    <button class="btn" id="generate-portfolio">
+                        <i class="fas fa-magic btn-icon"></i> Generate Portfolio
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="generated-success" id="generation-success">
+            <i class="fas fa-check-circle" style="color: var(--success); margin-right: 10px;"></i>
+            Portfolio generated successfully! You can preview it below.
+        </div>
+    </div>
+    
+    <div id="portfolio-preview" class="container">
+        <h3 class="animate__animated animate__fadeIn">Portfolio Preview</h3>
+        <iframe id="preview-frame" class="animate__animated animate__fadeIn"></iframe>
+        <div class="download-buttons">
+            <button class="btn" id="download-pdf">
+                <i class="fas fa-file-pdf btn-icon"></i> Download as PDF
+            </button>
+            <button class="btn" id="download-docx">
+                <i class="fas fa-file-word btn-icon"></i> Download as DOCX
+            </button>
+            <button class="btn btn-outline" id="edit-portfolio">
+                <i class="fas fa-edit btn-icon"></i> Edit Portfolio
+            </button>
+        </div>
+    </div>
+
+    <div id="loading-overlay">
+        <div class="loader"></div>
+        <p class="loading-text">Creating Your Portfolio...</p>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script>
+        // Tab Navigation Logic
+        document.querySelectorAll('.form-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabId = tab.getAttribute('data-tab');
+                switchTab(tabId);
+            });
+        });
+        
+        document.querySelectorAll('.next-tab').forEach(button => {
+            button.addEventListener('click', () => {
+                const nextTab = button.getAttribute('data-next');
+                switchTab(nextTab);
+                updateProgress();
+            });
+        });
+        
+        document.querySelectorAll('.prev-tab').forEach(button => {
+            button.addEventListener('click', () => {
+                const prevTab = button.getAttribute('data-prev');
+                switchTab(prevTab);
+                updateProgress();
+            });
+        });
+        
+        function switchTab(tabId) {
+            // Hide all tab contents
+            document.querySelectorAll('.form-tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Deactivate all tabs
+            document.querySelectorAll('.form-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Activate the selected tab and its content
+            document.getElementById(`${tabId}-tab`).classList.add('active');
+            document.querySelector(`.form-tab[data-tab="${tabId}"]`).classList.add('active');
+            
+            // Scroll to top of the tab content
+            window.scrollTo({ top: document.querySelector('.form-tabs').offsetTop - 20, behavior: 'smooth' });
+        }
+        
+        // Update progress bar as user moves through tabs
+        function updateProgress() {
+            const tabs = document.querySelectorAll('.form-tab');
+            const activeTabIndex = Array.from(tabs).findIndex(tab => tab.classList.contains('active'));
+            const progressPercentage = ((activeTabIndex + 1) / tabs.length) * 100;
+            
+            document.getElementById('form-progress').style.width = `${progressPercentage}%`;
+        }
+        
+        // Form field validation
+        function validateForm() {
+            const requiredFields = [
+                'portfolio-name',
+                'portfolio-bio',
+                'portfolio-education',
+                'portfolio-projects',
+                'portfolio-experience',
+                'portfolio-skills',
+                'portfolio-gmail',
+                'portfolio-github',
+                'portfolio-linkedin'
+            ];
+            
+            let isValid = true;
+            
+            requiredFields.forEach(field => {
+                const element = document.getElementById(field);
+                if (!element.value.trim()) {
+                    element.style.borderColor = '#ef4444';
+                    isValid = false;
+                } else {
+                    element.style.borderColor = '';
+                }
+            });
+            
+            return isValid;
+        }
+        
+        // Add animation to form sections on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const formSections = document.querySelectorAll('.form-section');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate__fadeIn');
+                    }
+                });
+            }, { threshold: 0.2 });
+            
+            formSections.forEach(section => {
+                observer.observe(section);
+            });
+            
+            // Initial progress
+            updateProgress();
+        });
+        
+        // Generate Portfolio
+        document.getElementById('generate-portfolio').addEventListener('click', function() {
+            if (!validateForm()) {
+                alert('Please fill in all required fields before generating your portfolio.');
+                return;
+            }
+            
+            // Show loading overlay with animation
+            document.getElementById('loading-overlay').style.display = 'flex';
+            
+            setTimeout(() => {
+                const name = document.getElementById('portfolio-name').value;
+                const bio = document.getElementById('portfolio-bio').value;
+                const education = document.getElementById('portfolio-education').value;
+                const projects = document.getElementById('portfolio-projects').value;
+                const experience = document.getElementById('portfolio-experience').value;
+                const skills = document.getElementById('portfolio-skills').value;
+                const gmail = document.getElementById('portfolio-gmail').value;
+                const github = document.getElementById('portfolio-github').value;
+                const linkedin = document.getElementById('portfolio-linkedin').value;
+                
+                // Create a more professional portfolio preview
+                const content = `
+                <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>${name} - Portfolio</title>
+                    <style>
+                        body {
+                            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                            color: #1f2937;
+                            line-height: 1.6;
+                            margin: 0;
+                            padding: 0;
+                        }
+                        .header {
+                            background: linear-gradient(135deg, #6366f1, #4f46e5);
+                            color: white;
+                            padding: 40px 20px;
+                            text-align: center;
+                        }
+                        .header h1 {
+                            font-size: 2.5rem;
+                            margin: 0;
+                        }
+                        .container {
+                            max-width: 800px;
+                            margin: 0 auto;
+                            padding: 20px;
+                        }
+                        .section {
+                            margin-bottom: 30px;
+                            border-bottom: 1px solid #e5e7eb;
+                            padding-bottom: 20px;
+                        }
+                        .section-title {
+                            color: #4f46e5;
+                            font-size: 1.5rem;
+                            margin-bottom: 15px;
+                            display: flex;
+                            align-items: center;
+                        }
+                        .section-title i {
+                            margin-right: 10px;
+                        }
+                        .contact-info {
+                            background-color: #f9fafb;
+                            padding: 20px;
+                            border-radius: 8px;
+                            margin-top: 30px;
+                        }
+                        .contact-item {
+                            display: flex;
+                            align-items: center;
+                            margin-bottom: 10px;
+                        }
+                        .contact-item i {
+                            width: 20px;
+                            margin-right: 10px;
+                            color: #4f46e5;
+                        }
+                        .skills-list {
+                            display: flex;
+                            flex-wrap: wrap;
+                            gap: 10px;
+                        }
+                        .skill-tag {
+                            background-color: #e0e7ff;
+                            color: #4f46e5;
+                            padding: 5px 12px;
+                            border-radius: 15px;
+                            font-size: 0.9rem;
+                        }
+                        a {
+                            color: #4f46e5;
+                            text-decoration: none;
+                        }
+                        a:hover {
+                            text-decoration: underline;
+                        }
+                    </style>
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+                </head>
+                <body>
+                    <div class="header">
+                        <h1>${name}</h1>
+                    </div>
+                    
+                    <div class="container">
+                        <div class="section">
+                            <h2 class="section-title">
+                                <i class="fas fa-user"></i> About Me
+                            </h2>
+                            <p>${bio}</p>
+                        </div>
+                        
+                        <div class="section">
+                            <h2 class="section-title">
+                                <i class="fas fa-graduation-cap"></i> Education
+                            </h2>
+                            <p>${education}</p>
+                        </div>
+                        
+                        <div class="section">
+                            <h2 class="section-title">
+                                <i class="fas fa-briefcase"></i> Experience
+                            </h2>
+                            <p>${experience}</p>
+                        </div>
+                        
+                        <div class="section">
+                            <h2 class="section-title">
+                                <i class="fas fa-code-branch"></i> Projects
+                            </h2>
+                            <p>${projects}</p>
+                        </div>
+                        
+                        <div class="section">
+                            <h2 class="section-title">
+                                <i class="fas fa-tools"></i> Skills
+                            </h2>
+                            <div class="skills-list">
+                                ${skills.split(',').map(skill => `<span class="skill-tag">${skill.trim()}</span>`).join('')}
+                            </div>
+                        </div>
+                        
+                        <div class="contact-info">
+                            <h2 class="section-title">
+                                <i class="fas fa-envelope"></i> Contact Information
+                            </h2>
+                            <div class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                <a href="mailto:${gmail}">${gmail}</a>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fab fa-github"></i>
+                                <a href="${github}" target="_blank">${github}</a>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fab fa-linkedin"></i>
+                                <a href="${linkedin}" target="_blank">${linkedin}</a>
+                            </div>
+                        </div>
+                    </div>
+                </body>
+                </html>
+                `;
+                
+                // Display Portfolio Preview
+                const iframe = document.getElementById('preview-frame');
+                iframe.srcdoc = content;
+                document.getElementById('portfolio-preview').style.display = 'block';
+                
+                // Show success message
+                document.getElementById('generation-success').style.display = 'block';
+                
+                // Hide loading overlay
+                document.getElementById('loading-overlay').style.display = 'none';
+                
+                // Smooth scroll to preview
+                document.getElementById('portfolio-preview').scrollIntoView({ behavior: 'smooth' });
+            }, 1500); // Simulate processing time for better UX
+        });
+        
+        // Edit Portfolio Button
+        document.getElementById('edit-portfolio').addEventListener('click', function() {
+            // Hide preview and success message
+            document.getElementById('portfolio-preview').style.display = 'none';
+            document.getElementById('generation-success').style.display = 'none';
+            
+            // Go back to first tab
+            switchTab('personal');
+            updateProgress();
+            
+            // Smooth scroll to form
+            document.querySelector('.container').scrollIntoView({ behavior: 'smooth' });
+        });
+        
+        // Download as PDF
+        document.getElementById('download-pdf').addEventListener('click', function() {
+            // Show loading
+            document.getElementById('loading-overlay').style.display = 'flex';
+            document.querySelector('.loading-text').innerText = 'Preparing PDF Download...';
+            
+            const content = document.getElementById('preview-frame').contentDocument.documentElement;
+            
+            const options = {
+                margin: 10,
+                filename: `${document.getElementById('portfolio-name').value}-Portfolio.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+            
+            setTimeout(() => {
+                html2pdf().from(content).set(options).save().then(() => {
+                    document.getElementById('loading-overlay').style.display = 'none';
+                });
+            }, 500);
+        });
+        
+        // Download as DOCX (Mock functionality as the actual implementation would require additional libraries)
+        document.getElementById('download-docx').addEventListener('click', function() {
+            document.getElementById('loading-overlay').style.display = 'flex';
+            document.querySelector('.loading-text').innerText = 'Preparing DOCX Download...';
+            
+            setTimeout(() => {
+                alert('DOCX download feature requires additional implementation with document generation libraries.');
+                document.getElementById('loading-overlay').style.display = 'none';
+            }, 1000);
+        });
+        
+        // Add input field animations
+        const inputFields = document.querySelectorAll('input, textarea');
+        inputFields.forEach(field => {
+            field.addEventListener('focus', function() {
+                this.parentElement.classList.add('animate__animated', 'animate__pulse');
+            });
+            
+            field.addEventListener('blur', function() {
+                this.parentElement.classList.remove('animate__animated', 'animate__pulse');
+                
+                // Validate on blur
+                if (this.hasAttribute('required') && !this.value.trim()) {
+                    this.style.borderColor = '#ef4444';
+                } else {
+                    this.style.borderColor = '';
+                }
+            });
+        });
+        
+        // Sample suggestions functionality (would be expanded with real suggestions in a production environment)
+        const educationField = document.getElementById('portfolio-education');
+        educationField.addEventListener('input', function() {
+            const suggestionsContainer = document.getElementById('education-suggestions');
+            
+            if (this.value.length > 3 && this.value.toLowerCase().includes('university')) {
+                suggestionsContainer.style.display = 'block';
+                suggestionsContainer.innerHTML = `
+                    <li>Bachelor of Science in Computer Science, University of Technology, 2018-2022</li>
+                    <li>Master of Business Administration, University of Business, 2022-2024</li>
+                `;
+                
+                // Add click event for suggestions
+                suggestionsContainer.querySelectorAll('li').forEach(item => {
+                    item.addEventListener('click', function() {
+                        educationField.value = this.textContent;
+                        suggestionsContainer.style.display = 'none';
+                    });
+                });
+            } else {
+                suggestionsContainer.style.display = 'none';
+            }
+        });
+        
+        // Add animation to hero section
+        window.addEventListener('load', function() {
+            document.querySelector('.hero').classList.add('animate__animated', 'animate__fadeIn');
+            document.querySelector('.hero-title').classList.add('animate__animated', 'animate__fadeInDown');
+            document.querySelector('.hero-subtitle').classList.add('animate__animated', 'animate__fadeInUp', 'animate__delay-1s');
+        });
+    </script>
+</body>
+</html>

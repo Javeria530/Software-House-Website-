@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>QuantumLeap Tech - Vacancies</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            width: 100%;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        /* Updated Header Styles */
+        #header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+            padding: 15px 50px;
+            position: sticky;
+            top: 0;
+            left: 0;
+            z-index: 999;
+        }
+
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .logo span {
+            font-size: 24px;
+            font-weight: 700;
+            color: #6c63ff; /* Purple color from the screenshot */
+            letter-spacing: 0.5px;
+        }
+
+        
+        #navbar {
+            display: flex;
+            align-items: center;
+            list-style: none;
+            gap: 14px;
+        }
+
+        #navbar li a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: #333;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            font-size: 24px;
+        }
+
+        #navbar li a:hover,
+        #navbar li a.active {
+            background-color: #f0f0f0;
+            color: #6c63ff;
+        }
+
+        #navbar li a.active {
+            border-bottom: 3px solid #6c63ff;
+            border-radius: 50% 50% 0 0;
+        }
+
+        #mobile {
+            display: none;
+            align-items: center;
+        }
+
+        #close {
+            display: none;
+        }
+
+        /* Section Padding */
+        .section-p1 {
+            padding: 40px 80px;
+        }
+
+        /* Product Grid */
+        .pro-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .pro {
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pro:hover {
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+            transform: translateY(-5px);
+        }
+
+        .pro img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .des {
+            padding: 20px;
+            flex-grow: 1;
+        }
+
+        .des h4 {
+            font-size: 20px;
+            color: #1E90FF; /* Dodger Blue */
+            margin-bottom: 10px;
+        }
+
+        .des h5 {
+            font-size: 14px;
+            font-weight: normal;
+            line-height: 1.6;
+            color: #606063;
+        }
+
+        .apply-button {
+            display: inline-block;
+            background-color: #1E90FF; /* Dodger Blue */
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 0 20px 20px;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .apply-button:hover {
+            background-color: #0066CC; /* Darker blue on hover */
+        }
+
+        /* Portfolio Builder Section */
+        #portfolio-assistant {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('images/img12.png');
+            background-size: cover;
+            background-position: center;
+            padding: 60px 40px;
+            color: #fff;
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .portfolio-info {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .portfolio-info h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .portfolio-info p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .button {
+            display: inline-block;
+            background-color: #1E90FF; /* Dodger Blue */
+            color: #fff;
+            padding: 14px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #0066CC; /* Darker blue on hover */
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a1a1a;
+            color: #fff;
+            padding: 40px 80px;
+        }
+
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 20px;
+            padding: 0 20px;
+        }
+
+        .footer-section h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            width: 50px;
+            height: 2px;
+            background: #1E90FF; /* Dodger Blue */
+        }
+
+        .footer-section p {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        #newsletter-form {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        #newsletter-form input {
+            padding: 12px 15px;
+            border: none;
+            border-radius: 5px 0 0 5px;
+            width: 70%;
+            outline: none;
+        }
+
+        #newsletter-form button {
+            padding: 12px 15px;
+            background-color: #1E90FF; /* Dodger Blue */
+            color: #fff;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #newsletter-form button:hover {
+            background-color: #0066CC; /* Darker blue on hover */
+        }
+
+        /* Service Section Header */
+        #service {
+            text-align: center;
+            padding: 60px 0 20px;
+        }
+
+        #service h2 {
+            font-size: 36px;
+            color: #1E90FF; /* Dodger Blue */
+            margin-bottom: 15px;
+        }
+
+        #service p {
+            font-size: 16px;
+            color: #606063;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 991px) {
+            .section-p1 {
+                padding: 40px 40px;
+            }
+            
+            #navbar {
+                position: fixed;
+                top: 0;
+                right: -300px;
+                height: 100vh;
+                width: 300px;
+                background-color: #e3e6f3;
+                box-shadow: 0 40px 60px rgba(0, 0, 0, 0.1);
+                padding: 80px 0 0 10px;
+                flex-direction: column;
+                transition: 0.3s;
+            }
+            
+            #navbar.active {
+                right: 0px;
+            }
+            
+            #navbar li {
+                margin-bottom: 25px;
+            }
+            
+            #mobile {
+                display: flex;
+                cursor: pointer;
+            }
+            
+            #close {
+                display: block;
+                position: absolute;
+                top: 30px;
+                left: 30px;
+                color: #222;
+                font-size: 24px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-p1 {
+                padding: 40px 20px;
+            }
+            
+            .pro-container {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .footer-container {
+                flex-direction: column;
+            }
+            
+            .footer-section {
+                margin-bottom: 30px;
+            }
+        }
+
+        @media (max-width: 477px) {
+            .header-container {
+                padding: 10px 20px;
+            }
+            
+            .logo img {
+                height: 30px;
+            }
+            
+            .logo span {
+                font-size: 20px;
+            }
+            
+            #navbar {
+                width: 240px;
+                padding: 80px 0 0 10px;
+            }
+            
+            .pro-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <div class="header-container">
+            <a href="/index.html" class="logo">
+                <img src="images/lo.png" alt="QuantumLeap Tech">
+                <span>QuantumLeap</span>
+            </a>
+            
+            <nav>
+                <ul id="navbar">
+                    <li><a href="index.html" class="active"><i class="fas fa-home"></i></a></li>
+                    <li><a href="whyus.html"><i class="fas fa-info-circle"></i></a></li>
+                    <li><a href="services.html"><i class="fas fa-cogs"></i></a></li>
+                    <li><a href="signup.html"><i class="fas fa-user-plus"></i></a></li>
+                    <li><a href="contact.html"><i class="fas fa-envelope"></i></a></li>
+                    <li><a href="vaci.html"><i class="fas fa-briefcase"></i></a></li>
+                    <li><a href="prot.html"><i class="fas fa-tachometer-alt"></i></a></li>
+                    <li id="close"><i class="fas fa-times"></i></li>
+                </ul>
+            </nav>
+            
+            <div id="mobile">
+                <i id="bar" class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <section id="service">
+        <h2>Career Opportunities</h2>
+        <p>Join our team of innovative professionals and take your career to the next level.</p>
+    </section>
+
+    <section id="product1" class="section-p1">
+        <div class="pro-container">
+            <div class="pro">
+                <img src="images/img12.png" alt="Web Development" />
+                <div class="des">
+                    <h4>Web Development</h4>
+                    <h5>Focuses on creating and maintaining websites. Involves both front-end (user interface) and back-end (server-side) development. Skills include HTML, CSS, JavaScript, and server-side languages like Python or PHP.</h5>
+                </div>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSeKgHz7pOYCMnU8IwayejIV-IzpIuNbi1A_qKrrYPK1PucoSw/viewform?usp=sf_link" class="apply-button" target="_blank">Apply Now</a>
+            </div>
+        
+            <div class="pro">
+                <img src="images/img13.png" alt="Mobile Development" />
+                <div class="des">
+                    <h4>Mobile Development</h4>
+                    <h5>Involves designing and building applications for mobile devices. This includes native app development for iOS (using Swift) and Android (using Kotlin or Java), as well as cross-platform development using frameworks like React Native or Flutter.</h5>
+                </div>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSeKgHz7pOYCMnU8IwayejIV-IzpIuNbi1A_qKrrYPK1PucoSw/viewform?usp=sf_link" class="apply-button" target="_blank">Apply Now</a>
+            </div>
+            
+            <div class="pro">
+                <img src="images/img14.png" alt="Data Analysis" />
+                <div class="des">
+                    <h4>Data Analysis</h4>
+                    <h5>The process of inspecting, cleaning, and modeling data to discover useful information, draw conclusions, and support decision-making. Involves skills in statistical analysis, data visualization, and tools like Excel, SQL, R, and Python.</h5>
+                </div>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSeKgHz7pOYCMnU8IwayejIV-IzpIuNbi1A_qKrrYPK1PucoSw/viewform?usp=sf_link" class="apply-button" target="_blank">Apply Now</a>
+            </div>
+            
+            <div class="pro">
+                <img src="images/img15.png" alt="Graphic Design" />
+                <div class="des">
+                    <h4>Graphic Design</h4>
+                    <h5>The art of creating visual content to communicate messages. This includes designing logos, brochures, advertisements, and digital graphics using tools like Adobe Photoshop, Illustrator, and InDesign.</h5>
+                </div>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSeKgHz7pOYCMnU8IwayejIV-IzpIuNbi1A_qKrrYPK1PucoSw/viewform?usp=sf_link" class="apply-button" target="_blank">Apply Now</a>
+            </div>
+            
+            <div class="pro">
+                <img src="images/img16.png" alt="UI/UX Design" />
+                <div class="des">
+                    <h4>UI/UX Design</h4>
+                    <h5>Focuses on designing user interfaces (UI) and improving user experiences (UX) for digital products. UI design is about the look and feel of an application, while UX design focuses on how the product feels and functions, ensuring ease of use and accessibility.</h5>
+                </div>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSeKgHz7pOYCMnU8IwayejIV-IzpIuNbi1A_qKrrYPK1PucoSw/viewform?usp=sf_link" class="apply-button" target="_blank">Apply Now</a>
+            </div>
+            
+            <div class="pro">
+                <img src="images/img18.png" alt="Data Science" />
+                <div class="des">
+                    <h4>Data Science</h4>
+                    <h5>Data Science involves analyzing and interpreting complex data to extract meaningful insights. It combines statistics, programming, and domain knowledge to identify patterns and trends. Key tasks include data cleaning, exploratory analysis, and predictive modeling.</h5>
+                </div>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSeKgHz7pOYCMnU8IwayejIV-IzpIuNbi1A_qKrrYPK1PucoSw/viewform?usp=sf_link" class="apply-button" target="_blank">Apply Now</a>
+            </div>
+            
+            <div class="pro">
+                <img src="images/img19.png" alt="Artificial Intelligence" />
+                <div class="des">
+                    <h4>Artificial Intelligence</h4>
+                    <h5>Artificial Intelligence focuses on creating systems capable of performing tasks that require human intelligence, such as learning, reasoning, and problem-solving. It includes technologies like machine learning, natural language processing, and computer vision. AI applications range from chatbots to autonomous vehicles.</h5>
+                </div>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSeKgHz7pOYCMnU8IwayejIV-IzpIuNbi1A_qKrrYPK1PucoSw/viewform?usp=sf_link" class="apply-button" target="_blank">Apply Now</a>
+            </div>
+            
+            <div class="pro">
+                <img src="images/img17.png" alt="Video Animation" />
+                <div class="des">
+                    <h4>Video Animation</h4>
+                    <h5>The creation of moving visuals using animation techniques. This includes 2D and 3D animation for various applications such as explainer videos, promotional content, and entertainment. Tools often used include Adobe After Effects and Blender.</h5>
+                </div>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSeKgHz7pOYCMnU8IwayejIV-IzpIuNbi1A_qKrrYPK1PucoSw/viewform?usp=sf_link" class="apply-button" target="_blank">Apply Now</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio-assistant" class="section-p1">
+        <div class="portfolio-container">
+            <div class="portfolio-info">
+                <h2>Create Your Personal Portfolio</h2>
+                <p>Need help creating a professional portfolio? Our assistant can help you build an impressive portfolio in minutes. Get started now!</p>
+                <a href="ai_portfolio_builder.html" class="button">Build Your Portfolio</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p><b>Email: </b>Nakhalsheikh4@gmail.com</p>
+                <p><b>Phone: </b>+123-456-7890</p>
+                <p><b>Address: </b>136 Lahore Road, Sheikhupura, Pakistan</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-icons" style="margin-top: 20px;">
+                    <a href="#" style="color: white; font-size: 24px; margin-right: 15px;"><i class="fab fa-facebook"></i></a>
+                    <a href="#" style="color: white; font-size: 24px; margin-right: 15px;"><i class="fab fa-twitter"></i></a>
+                    <a href="#" style="color: white; font-size: 24px; margin-right: 15px;"><i class="fab fa-instagram"></i></a>
+                    <a href="#" style="color: white; font-size: 24px; margin-right: 15px;"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Newsletter</h3>
+                <p>Subscribe to our newsletter for the latest updates and exclusive offers.</p>
+                <form id="newsletter-form">
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+                <p id="confirmation-message" style="display: none; color: #1E90FF; margin-top: 10px;">Subscribed!</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile navigation functionality
+        const bar = document.getElementById('bar');
+        const close = document.getElementById('close');
+        const nav = document.getElementById('navbar');
+
+        if (bar) {
+            bar.addEventListener('click', () => {
+                nav.classList.add('active');
+            });
+        }
+
+        if (close) {
+            close.addEventListener('click', () => {
+                nav.classList.remove('active');
+            });
+        }
+
+        // Newsletter form functionality
+        const newsletterForm = document.getElementById('newsletter-form');
+        const confirmationMessage = document.getElementById('confirmation-message');
+
+        if (newsletterForm) {
+            newsletterForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                // Here you would typically send the form data to your server
+                // For now, just show the confirmation message
+                confirmationMessage.style.display = 'block';
+                newsletterForm.reset();
+                setTimeout(() => {
+                    confirmationMessage.style.display = 'none';
+                }, 3000);
+            });
+        }
+    </script>
+</body>
+</html>

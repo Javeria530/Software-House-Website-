@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+  <title>Sign Up - QuantumLeap Tech</title>
+  <link rel="stylesheet" href="/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="/js/api.js"></script>
+  <style>
+    .form-group.error input {
+      border-color: #ff3860;
+    }
+    
+    .form-group .error-message {
+      color: #ff3860;
+      font-size: 0.85rem;
+      margin-top: 0.25rem;
+      display: none;
+    }
+    
+    .form-group.error .error-message {
+      display: block;
+    }
+    
+    /* Email validation strength indicator */
+    .email-strength-meter {
+      height: 4px;
+      width: 100%;
+      background-color: #eee;
+      margin-top: 5px;
+      border-radius: 2px;
+      display: none;
+    }
+    
+    .email-strength-meter div {
+      height: 100%;
+      border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+    
+    .invalid-email .email-strength-meter div {
+      width: 30%;
+      background-color: #ff3860;
+    }
+    
+    .weak-email .email-strength-meter div {
+      width: 60%;
+      background-color: #ffdd57;
+    }
+    
+    .valid-email .email-strength-meter div {
+      width: 100%;
+      background-color: #23d160;
+    }
+    
+    .form-group.email-focused .email-strength-meter {
+      display: block;
+    }
+    
+    /* Password strength meter */
+    .password-strength-meter {
+      height: 4px;
+      width: 100%;
+      background-color: #eee;
+      margin-top: 5px;
+      border-radius: 2px;
+      display: none;
+    }
+    
+    .password-strength-meter div {
+      height: 100%;
+      border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+    
+    .weak-password .password-strength-meter div {
+      width: 30%;
+      background-color: #ff3860;
+    }
+    
+    .medium-password .password-strength-meter div {
+      width: 60%;
+      background-color: #ffdd57;
+    }
+    
+    .strong-password .password-strength-meter div {
+      width: 100%;
+      background-color: #23d160;
+    }
+    
+    .form-group.password-focused .password-strength-meter {
+      display: block;
+    }
+    
+    /* Feedback animation */
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+      20%, 40%, 60%, 80% { transform: translateX(5px); }
+    }
+    
+    .shake {
+      animation: shake 0.5s;
+    }
+    
+    /* Password visibility toggle */
+    .password-toggle {
+      position: absolute;
+      right: 40px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #666;
+    }
+    
+    .form-group.has-icon {
+      position: relative;
+    }
+  </style>
+</head>
+<body>
+  <header id="header">
+    <div class="header-container">
+      <a href="/index.html" class="logo">
+        <img src="/images/lo.png" alt="QuantumLeap Tech">
+        <span>QuantumLeap</span>
+      </a>
+      <nav>
+        <ul id="navbar">
+          <li><a href="/index.html"><i class="fas fa-home"></i></a></li>
+          <li><a href="/whyus.html"><i class="fas fa-info-circle"></i></a></li>
+          <li><a href="/services.html"><i class="fas fa-cogs"></i></a></li>
+          <li><a href="/signup.html" class="active"><i class="fas fa-user-plus"></i></a></li>
+          <li><a href="/contact.html"><i class="fas fa-envelope"></i></a></li>
+          <li><a href="/vaci.html"><i class="fas fa-briefcase"></i></a></li>
+          <li><a href="/login.html"><i class="fas fa-sign-in-alt"></i></a></li>
+          <li><a href="/prot.html"><i class="fas fa-tachometer-alt"></i></a></li>
+          <li id="close"><i class="fas fa-times"></i></li>
+        </ul>
+      </nav>
+      <div id="mobile">
+        <i id="bar" class="fas fa-bars"></i>
+      </div>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="container">
+      <div style="max-width: 500px; margin: 0 auto;">
+        <h2 style="text-align: center; margin-bottom: 2rem; font-size: 2.5rem;">
+          <i class="fas fa-user-plus" style="color: var(--primary-color);"></i> Create an Account
+        </h2>
+        
+        <div style="background-color: #e3f2fd; padding: 15px; border-radius: 5px; margin-bottom: 20px; border-left: 4px solid #2196f3;">
+          <p style="margin: 0; font-size: 0.9rem;">
+            <i class="fas fa-info-circle"></i> <strong>Important:</strong> You must use a valid Gmail address to register (gmail.com or gmail.nu.edu.pk).
+          </p>
+        </div>
+
+        <form id="signup-form" novalidate>
+          <div class="form-group has-icon">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" placeholder="Enter your full name" required />
+            <i class="fas fa-user"></i>
+            <small class="error-message">Please enter your full name (at least 2 characters)</small>
+          </div>
+
+          <div class="form-group has-icon email-validation">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" placeholder="Enter your Gmail address" required />
+            <i class="fas fa-envelope"></i>
+            <small class="error-message">Please enter a valid Gmail address (username@gmail.com)</small>
+            <div class="email-strength-meter"><div></div></div>
+            <small style="display: block; margin-top: 4px; color: #666; font-size: 0.75rem;">
+              <i class="fas fa-info-circle"></i> Only Gmail addresses are allowed (gmail.com or gmail.nu.edu.pk)
+            </small>
+          </div>
+
+          <div class="form-group has-icon">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Create a strong password" required />
+            <i class="fas fa-lock"></i>
+            <span class="password-toggle"><i class="fas fa-eye"></i></span>
+            <small class="error-message">Password must be at least 8 characters with letters and numbers</small>
+            <div class="password-strength-meter"><div></div></div>
+          </div>
+
+          <div class="form-group has-icon">
+            <label for="confirm-password">Confirm Password</label>
+            <input type="password" id="confirm-password" placeholder="Confirm your password" required />
+            <i class="fas fa-lock"></i>
+            <span class="password-toggle"><i class="fas fa-eye"></i></span>
+            <small class="error-message">Passwords do not match</small>
+          </div>
+
+          <div class="form-group checkbox" style="margin-bottom: 1.5rem;">
+            <input type="checkbox" id="terms" required>
+            <label for="terms" style="margin: 0; font-weight: normal; text-transform: none;">
+              I agree to the <a href="#" style="color: var(--primary-color); text-decoration: none;">Terms of Service</a> and 
+              <a href="#" style="color: var(--primary-color); text-decoration: none;">Privacy Policy</a>
+            </label>
+            <small class="error-message">You must accept the terms and conditions</small>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; margin-bottom: 1.5rem;">
+            <i class="fas fa-user-plus"></i> Create Account
+          </button>
+        </form>
+
+        <p style="text-align: center; margin-top: 2rem;">
+          Already have an account? 
+          <a href="/login.html" style="color: var(--primary-color); text-decoration: none; font-weight: 600;">
+            Login here
+          </a>
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3><i class="fas fa-envelope-open-text"></i> Contact Us</h3>
+        <p><i class="fas fa-envelope"></i> Nakhalsheikh4@gmail.com</p>
+        <p><i class="fas fa-phone"></i> +123-456-7890</p>
+        <p><i class="fas fa-map-marker-alt"></i> 136 Lahore Road, Sheikhupura, Pakistan</p>
+      </div>
+
+      <div class="footer-section">
+        <h3><i class="fas fa-paper-plane"></i> Newsletter</h3>
+        <p>Subscribe to our newsletter for the latest updates and exclusive offers.</p>
+        <form id="newsletter-form">
+          <input type="email" id="newsletter-email" name="email" placeholder="Enter your Gmail address" required>
+          <button type="submit"><i class="fas fa-arrow-right"></i></button>
+        </form>
+        <small style="display: block; margin-top: 4px; color: #999; font-size: 0.75rem;">
+          <i class="fas fa-info-circle"></i> Only Gmail addresses are allowed
+        </small>
+        <p id="confirmation-message" style="display: none; color: #4ECDC4; margin-top: 10px;">
+          <i class="fas fa-check-circle"></i> Subscribed!
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Strict Gmail-only email validation
+    function validateEmail(email) {
+      if (!email) return { isValid: false, strength: 'invalid' };
+      
+      // Basic format check
+      const basicCheck = /^.+@.+\..+$/.test(email);
+      if (!basicCheck) return { isValid: false, strength: 'invalid', message: 'Invalid email format' };
+      
+      // Split email into parts
+      const [username, domain] = email.split('@');
+      
+      // Check if domain starts with "gmail"
+      if (!domain.startsWith('gmail')) {
+        return { 
+          isValid: false, 
+          strength: 'invalid', 
+          message: 'Only Gmail accounts are allowed' 
+        };
+      }
+      
+      // Check allowed extensions for gmail
+      const validExtensions = ['.com', '.nu.edu.pk'];
+      let hasValidExtension = false;
+      
+      for (const ext of validExtensions) {
+        if (domain === 'gmail' + ext) {
+          hasValidExtension = true;
+          break;
+        }
+      }
+      
+      if (!hasValidExtension) {
+        return { 
+          isValid: false, 
+          strength: 'invalid', 
+          message: 'Invalid Gmail extension. Allowed: gmail.com, gmail.nu.edu.pk' 
+        };
+      }
+      
+      // Gmail username validation
+      // Gmail usernames must be between 6-30 characters and contain only letters, numbers, periods, and no consecutive periods
+      if (username.length < 6 || username.length > 30) {
+        return { 
+          isValid: false, 
+          strength: 'weak', 
+          message: 'Gmail username must be 6-30 characters long' 
+        };
+      }
+      
+      // Check for valid characters in Gmail username
+      const validUsernameChars = /^[a-zA-Z0-9.]+$/.test(username);
+      if (!validUsernameChars) {
+        return { 
+          isValid: false, 
+          strength: 'weak', 
+          message: 'Gmail username can only contain letters, numbers, and periods' 
+        };
+      }
+      
+      // Check for consecutive periods
+      if (username.includes('..')) {
+        return { 
+          isValid: false, 
+          strength: 'weak', 
+          message: 'Gmail username cannot contain consecutive periods' 
+        };
+      }
+      
+      // Username cannot start or end with a period
+      if (username.startsWith('.') || username.endsWith('.')) {
+        return { 
+          isValid: false, 
+          strength: 'weak', 
+          message: 'Gmail username cannot start or end with a period' 
+        };
+      }
+      
+      // If all checks pass
+      return { isValid: true, strength: 'valid', message: 'Valid Gmail address' };
+    }
+    
+    // Password strength checker
+    function checkPasswordStrength(password) {
+      if (!password) return { strength: 'weak', message: 'Password is required' };
+      
+      // Basic checks
+      if (password.length < 8) {
+        return { strength: 'weak', message: 'Password must be at least 8 characters' };
+      }
+      
+      let score = 0;
+      
+      // Award points for length
+      if (password.length >= 8) score += 1;
+      if (password.length >= 12) score += 1;
+      
+      // Award points for complexity
+      if (/[a-z]/.test(password)) score += 1; // lowercase
+      if (/[A-Z]/.test(password)) score += 1; // uppercase
+      if (/[0-9]/.test(password)) score += 1; // numbers
+      if (/[^a-zA-Z0-9]/.test(password)) score += 1; // special chars
+      
+      // Determine strength based on score
+      if (score < 3) {
+        return { 
+          strength: 'weak', 
+          message: 'Weak password. Add numbers, special characters, or make it longer.'
+        };
+      } else if (score < 5) {
+        return { 
+          strength: 'medium', 
+          message: 'Medium password. Add uppercase letters or special characters to make it stronger.'
+        };
+      } else {
+        return { 
+          strength: 'strong', 
+          message: 'Strong password!'
+        };
+      }
+    }
+    
+    // Field validation functions
+    const validateField = {
+      name: (value) => {
+        const trimmed = value.trim();
+        return {
+          isValid: trimmed.length >= 2,
+          message: trimmed.length === 0 ? 'Name is required' : 
+                   trimmed.length < 2 ? 'Name must be at least 2 characters' : ''
+        };
+      },
+      email: (value) => {
+        const result = validateEmail(value.trim());
+        return {
+          isValid: result.isValid,
+          strength: result.strength,
+          message: !value.trim() ? 'Email is required' :
+                   result.strength === 'invalid' ? 'Please enter a valid email address' :
+                   result.strength === 'weak' ? 'This email domain may not be valid' : ''
+        };
+      },
+      password: (value) => {
+        const result = checkPasswordStrength(value);
+        return {
+          isValid: result.strength !== 'weak',
+          strength: result.strength,
+          message: result.message
+        };
+      },
+      'confirm-password': (value) => {
+        const passwordValue = document.getElementById('password').value;
+        return {
+          isValid: value === passwordValue && value.length > 0,
+          message: !value ? 'Please confirm your password' : 
+                   value !== passwordValue ? 'Passwords do not match' : ''
+        };
+      },
+      terms: (checked) => ({
+        isValid: checked,
+        message: 'You must accept the terms and conditions'
+      })
+    };
+
+    // Setup field validation events
+    const fields = ['name', 'email', 'password', 'confirm-password'];
+    
+    // Handle email focus state for showing strength meter
+    document.getElementById('email').addEventListener('focus', function() {
+      this.closest('.form-group').classList.add('email-focused');
+    });
+    
+    document.getElementById('email').addEventListener('blur', function() {
+      this.closest('.form-group').classList.remove('email-focused');
+    });
+    
+    // Handle password focus state for showing strength meter
+    document.getElementById('password').addEventListener('focus', function() {
+      this.closest('.form-group').classList.add('password-focused');
+    });
+    
+    document.getElementById('password').addEventListener('blur', function() {
+      this.closest('.form-group').classList.remove('password-focused');
+    });
+    
+    // Setup real-time validation
+    fields.forEach(field => {
+      const element = document.getElementById(field);
+      
+      // Validate on blur
+      element.addEventListener('blur', () => {
+        validateInput(field);
+      });
+      
+      // Setup real-time feedback for email and password
+      if (field === 'email' || field === 'password') {
+        element.addEventListener('input', () => {
+          const formGroup = element.closest('.form-group');
+          
+          if (field === 'email') {
+            const result = validateEmail(element.value.trim());
+            formGroup.classList.remove('invalid-email', 'weak-email', 'valid-email');
+            
+            if (element.value.trim()) {
+              formGroup.classList.add(`${result.strength}-email`);
+            }
+            
+            // Update error message in real-time
+            const errorMessage = formGroup.querySelector('.error-message');
+            if (result.isValid) {
+              formGroup.classList.remove('error');
+            } else if (element.value.trim()) {
+              formGroup.classList.add('error');
+              if (result.message) {
+                errorMessage.textContent = result.message;
+              } else if (result.strength === 'weak') {
+                errorMessage.textContent = 'This email format is not valid for Gmail';
+              } else {
+                errorMessage.textContent = 'Please enter a valid Gmail address';
+              }
+            }
+          }
+          
+          if (field === 'password') {
+            const result = checkPasswordStrength(element.value);
+            formGroup.classList.remove('weak-password', 'medium-password', 'strong-password');
+            
+            if (element.value) {
+              formGroup.classList.add(`${result.strength}-password`);
+            }
+            
+            // Update error message in real-time
+            const errorMessage = formGroup.querySelector('.error-message');
+            errorMessage.textContent = result.message;
+            
+            if (result.strength !== 'weak') {
+              formGroup.classList.remove('error');
+            } else if (element.value) {
+              formGroup.classList.add('error');
+            }
+            
+            // Also update confirm password validation if it has a value
+            const confirmPassword = document.getElementById('confirm-password');
+            if (confirmPassword.value) {
+              validateInput('confirm-password');
+            }
+          }
+        });
+      } else {
+        // For other fields, just clear error on input
+        element.addEventListener('input', () => {
+          const formGroup = element.closest('.form-group');
+          if (formGroup.classList.contains('error')) {
+            formGroup.classList.remove('error');
+          }
+        });
+      }
+    });
+
+    // Validate terms checkbox
+    document.getElementById('terms').addEventListener('change', () => {
+      validateInput('terms');
+    });
+    
+    // Password visibility toggle
+    document.querySelectorAll('.password-toggle').forEach(toggle => {
+      toggle.addEventListener('click', function() {
+        const passwordField = this.previousElementSibling.previousElementSibling;
+        const icon = this.querySelector('i');
+        
+        if (passwordField.type === 'password') {
+          passwordField.type = 'text';
+          icon.classList.remove('fa-eye');
+          icon.classList.add('fa-eye-slash');
+        } else {
+          passwordField.type = 'password';
+          icon.classList.remove('fa-eye-slash');
+          icon.classList.add('fa-eye');
+        }
+      });
+    });
+
+    function validateInput(fieldId) {
+      const field = document.getElementById(fieldId);
+      const formGroup = field.closest('.form-group');
+      
+      let result;
+      if (fieldId === 'terms') {
+        result = validateField[fieldId](field.checked);
+      } else {
+        result = validateField[fieldId](field.value);
+      }
+      
+      const errorMessage = formGroup.querySelector('.error-message');
+      if (errorMessage && result.message) {
+        errorMessage.textContent = result.message;
+      }
+      
+      if (!result.isValid) {
+        formGroup.classList.add('error');
+        return false;
+      } else {
+        formGroup.classList.remove('error');
+        return true;
+      }
+    }
+
+    function validateForm() {
+      let isValid = true;
+      
+      // Validate all fields
+      fields.forEach(field => {
+        if (!validateInput(field)) {
+          isValid = false;
+          const element = document.getElementById(field);
+          element.closest('.form-group').classList.add('shake');
+          
+          // Remove shake animation after it completes
+          setTimeout(() => {
+            element.closest('.form-group').classList.remove('shake');
+          }, 500);
+        }
+      });
+      
+      // Validate terms checkbox
+      if (!validateInput('terms')) {
+        isValid = false;
+        const element = document.getElementById('terms');
+        element.closest('.form-group').classList.add('shake');
+        
+        setTimeout(() => {
+          element.closest('.form-group').classList.remove('shake');
+        }, 500);
+      }
+      
+      return isValid;
+    }
+
+    document.getElementById('signup-form').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      
+      // Validate form before submission
+      if (!validateForm()) {
+        return;
+      }
+
+      const submitButton = this.querySelector('button[type="submit"]');
+      submitButton.classList.add('btn-loading');
+      submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating Account...';
+
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+
+      try {
+        // Final email validation check before submitting
+        const emailValidation = validateEmail(email);
+        if (!emailValidation.isValid) {
+          throw new Error(emailValidation.message || 'Please enter a valid Gmail address');
+        }
+        
+        const userData = {
+          name,
+          email,
+          password,
+          role: 'user'
+        };
+
+        const data = await registerUser(userData);
+
+        if (data.message === 'User registered') {
+          submitButton.classList.remove('btn-loading');
+          submitButton.innerHTML = '<i class="fas fa-check-circle"></i> Account Created!';
+          submitButton.classList.add('btn-success');
+
+          // Show success message
+          const successDiv = document.createElement('div');
+          successDiv.className = 'feedback valid';
+          successDiv.style.textAlign = 'center';
+          successDiv.style.marginTop = '1rem';
+          successDiv.style.padding = '10px';
+          successDiv.style.borderRadius = '4px';
+          successDiv.style.backgroundColor = 'rgba(35, 209, 96, 0.1)';
+          successDiv.style.color = '#23d160';
+          successDiv.innerHTML = `<i class="fas fa-check-circle"></i> Account created successfully! Redirecting to login...`;
+          
+          this.appendChild(successDiv);
+
+          setTimeout(() => {
+            window.location.href = '/login.html';
+          }, 2000);
+        } else {
+          throw new Error(data.message || 'Registration failed');
+        }
+      } catch (error) {
+        submitButton.classList.remove('btn-loading');
+        submitButton.innerHTML = '<i class="fas fa-user-plus"></i> Create Account';
+
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'feedback invalid';
+        errorDiv.style.textAlign = 'center';
+        errorDiv.style.marginTop = '1rem';
+        errorDiv.style.padding = '10px';
+        errorDiv.style.borderRadius = '4px';
+        errorDiv.style.backgroundColor = 'rgba(255, 56, 96, 0.1)';
+        errorDiv.style.color = '#ff3860';
+        errorDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${error.message}`;
+
+        this.appendChild(errorDiv);
+        setTimeout(() => errorDiv.remove(), 4000);
+      }
+    });
+
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+    
+          // Newsletter form
+    document.getElementById('newsletter-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = document.getElementById('newsletter-email').value.trim();
+      
+      // Validate email before submission
+      const emailValidation = validateEmail(email);
+      if (!emailValidation.isValid) {
+        const emailField = document.getElementById('newsletter-email');
+        emailField.style.borderColor = '#ff3860';
+        
+        // Show error message
+        let errorMessage = document.getElementById('newsletter-error');
+        if (!errorMessage) {
+          errorMessage = document.createElement('p');
+          errorMessage.id = 'newsletter-error';
+          errorMessage.style.color = '#ff3860';
+          errorMessage.style.fontSize = '0.85rem';
+          errorMessage.style.marginTop = '5px';
+          this.appendChild(errorMessage);
+        }
+        
+        errorMessage.textContent = emailValidation.message || 'Please enter a valid Gmail address';
+        
+        // Reset after 3 seconds
+        setTimeout(() => {
+          emailField.style.borderColor = '';
+          if (errorMessage) errorMessage.remove();
+        }, 3000);
+        
+        return;
+      }
+      
+      // Show confirmation message
+      document.getElementById('newsletter-email').value = '';
+      document.getElementById('confirmation-message').style.display = 'block';
+      
+      // Hide confirmation after 3 seconds
+      setTimeout(() => {
+        document.getElementById('confirmation-message').style.display = 'none';
+      }, 3000);
+    });
+  </script>
+  <script src="/js/script.js"></script>
+</body>
+</html>

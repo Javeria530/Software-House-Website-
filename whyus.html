@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Why QuantumLeap Tech</title>
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="/js/script.js" defer></script>
+</head>
+<body>
+    <header id="header">
+        <div class="header-container">
+            <a href="/index.html" class="logo">
+                <img src="/images/lo.png" alt="QuantumLeap Tech">
+                <span>QuantumLeap</span>
+            </a>
+            
+            <nav>
+                <ul id="navbar">
+                    <li><a href="/index.html"><i class="fas fa-home"></i></a></li>
+                    <li><a href="/whyus.html" class="active"><i class="fas fa-info-circle"></i></a></li>
+                    <li><a href="/services.html"><i class="fas fa-cogs"></i></a></li>
+                    <li><a href="/signup.html"><i class="fas fa-user-plus"></i></a></li>
+                    <li><a href="/contact.html"><i class="fas fa-envelope"></i></a></li>
+                    <li><a href="/vaci.html"><i class="fas fa-briefcase"></i></a></li>
+                    <li><a href="/prot.html"><i class="fas fa-tachometer-alt"></i></a></li>
+                    <li id="close"><i class="fas fa-times"></i></li>
+                </ul>
+            </nav>
+            
+            <div id="mobile">
+                <i id="bar" class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <section id="whyus">
+        <h2 data-text="Why QuantumLeap Tech?">Why QuantumLeap Tech?</h2>
+        <p>QuantumLeap Tech is dedicated to transforming your ideas into cutting-edge solutions with innovation and excellence in software development. Our mission is to provide top-notch, tailored software solutions that empower businesses to achieve their goals through innovation and technology. We envision being a global leader in software development, recognized for our commitment to quality, innovation, and customer satisfaction. Our team of seasoned professionals combines expertise across various industries to deliver customized software that drives your business forward.</p>
+    </section>
+
+    <section id="product1" class="section">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 3rem;">Our Core Values</h2>
+            <div class="pro-container">
+                <div class="pro">
+                    <img src="/images/img1.png" alt="Client Centric">
+                    <div class="des">
+                        <h4><i class="fas fa-users"></i> Client Centric</h4>
+                        <h5>We satisfy our clients by exceeding their expectation of quality and level of service</h5>
+                    </div>
+                </div>
+                <div class="pro">
+                    <img src="/images/img4.png" alt="Innovative">
+                    <div class="des">
+                        <h4><i class="fas fa-lightbulb"></i> Innovative</h4>
+                        <h5>We perform research and development efforts in search of innovative solutions</h5>
+                    </div>
+                </div>
+                <div class="pro">
+                    <img src="/images/img2.png" alt="Results Driven">
+                    <div class="des">
+                        <h4><i class="fas fa-chart-line"></i> Results Driven</h4>
+                        <h5>Results Driven solutions enabling customers to exceed potential and lower their costs</h5>
+                    </div>
+                </div>
+                <div class="pro">
+                    <img src="/images/img3.png" alt="Scalability">
+                    <div class="des">
+                        <h4><i class="fas fa-expand-arrows-alt"></i> Scalability</h4>
+                        <h5>Easily adjust resources to match project needs, ensuring flexibility for changing demands.</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3><i class="fas fa-envelope-open-text"></i> Contact Us</h3>
+                <p><i class="fas fa-envelope"></i> Nakhalsheikh4@gmail.com</p>
+                <p><i class="fas fa-phone"></i> +123-456-7890</p>
+                <p><i class="fas fa-map-marker-alt"></i> 136 Lahore Road, Sheikhupura, Pakistan</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3><i class="fas fa-paper-plane"></i> Newsletter</h3>
+                <p>Subscribe to our newsletter for the latest updates and exclusive offers.</p>
+                <form id="newsletter-form">
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                    <button type="submit"><i class="fas fa-arrow-right"></i></button>
+                </form>
+                <p id="confirmation-message" style="display: none; color: #4ECDC4; margin-top: 10px;">
+                    <i class="fas fa-check-circle"></i> Subscribed!
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Handle header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
+    <script src="/js/script.js"></script>
+</body>
+</html>
